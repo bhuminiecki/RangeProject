@@ -2,8 +2,10 @@
 const int buttonLeft=2;
 const int buttonRight=3;
 
-const int channelOne=13;
+const int channelOne=11;
 const int channelTwo=12;
+
+int randomChance;
 
 //variable declaration
 int leftButtonState=0;
@@ -34,13 +36,13 @@ void setup()
 void loop()
 {
   leftButtonState=digitalRead(buttonLeft);
-  //Serial.println(leftButtonState);
+  Serial.println(leftButtonState);
 
   rightButtonState=digitalRead(buttonRight);
   //Serial.println(rightButtonState);
     
   //input read
-  if(leftButtonState==0&&rightButtonState==0)
+  if((leftButtonState==0&&rightButtonState==0)||targetDirection==2)//safety feature, if both buttons are pressed restart the board
   {
     targetDirection=2;
   }
@@ -48,10 +50,19 @@ void loop()
   {
     targetDirection=1;
   }
-  else
+  else if(rightButtonState==0)
   {
     targetDirection=0;
   }
+  /*else //WIP feature for randomly changing the movement of the target mid way.
+  {
+    randomChance=random(100);
+    if(randomChance==1)
+    {
+      targetDirection+=1;
+      targetDirection=targetDirection%2;
+    }
+  }*/
 
   //engine controls
   if(targetDirection==0)
