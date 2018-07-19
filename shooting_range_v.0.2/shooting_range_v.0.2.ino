@@ -67,8 +67,8 @@ void loop()
   //engine controls
   if(targetDirection==0)
   {
-    digitalWrite(channelOne,HIGH);
     digitalWrite(channelTwo,LOW);
+    digitalWrite(channelOne,HIGH);
   }
   else if(targetDirection==1)
   {
